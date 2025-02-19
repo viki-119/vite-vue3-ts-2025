@@ -1,0 +1,14 @@
+{
+  // "files": [],
+  // "references": [
+  //   { "path": "./tsconfig.app.json" },
+  //   { "path": "./tsconfig.node.json" }
+  // ],
+  "compilerOptions": {
+    "baseUrl": ".",  // 路径别名的基础URL，相对于当前tsconfig.json文件的位置。
+    "paths": {
+      "@/*": ["./src/*"],
+    },
+  }
+}
+
