@@ -6,6 +6,6 @@ import '@/styles/style.css';
 import App from './App.vue';
 
 const app = createApp(App);
-app.use(router);
-app.use(store);
+app.use(router); // 注册路由
+app.use(store); // 注册vuex
 app.mount('#app');

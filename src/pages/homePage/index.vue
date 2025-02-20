@@ -1,9 +1,26 @@
 <script setup lang="ts">
-import HelloWorld from '@/components/HelloWorld.vue'
+  import { computed } from 'vue'
+  import { useStore } from 'vuex'
+  import { useRouter } from 'vue-router'
+  import HelloWorld from '@/components/HelloWorld.vue'
+  import ChildItem from '@/pages/homePage/item/index.vue'
+  const { state, dispatch } = useStore();
+  const router = useRouter();
+
+  dispatch('user/queryUserList'); // 调用action方法查询用户列表
+
+  const userList = computed(() => state.user.userList);
+  const handleChildEvent = (userInfo) => {
+    router.push({ path: `/detail/${userInfo.id}`, query: { name: userInfo.name } });
+  }
+
 </script>
 
 <template>
-  <div>
+  <div >
+    <div class="child-Item-container">
+      <ChildItem v-for="item in userList" :key="item.id" :userInfo="item" :name="item.name" @callFromChild="handleChildEvent"></ChildItem>
+    </div>
     <a href="https://vite.dev" target="_blank">
       你好，Vite + Vue!
     </a>
@@ -31,6 +48,13 @@ import HelloWorld from '@/components/HelloWorld.vue'
 </style>
 
 <style lang="scss">
+  .child-Item-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    align-items: center;
+  }
+
   .myText {
     .myXX {
       color: red;
