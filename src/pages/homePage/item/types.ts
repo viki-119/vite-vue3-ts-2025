@@ -1,4 +1,5 @@
 export interface ListItemType {
-  name: String,
-  id: Number,
+  id: number;
+  name: string;
+  role: string;
 }

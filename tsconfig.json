@@ -9,6 +9,7 @@
     "paths": {
       "@/*": ["./src/*"],
     },
+    // "types": ["elements-plus/global"] // 使用 Volar，通过compilerOptions.type 指定全局组件类型
   }
 }
 
