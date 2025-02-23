@@ -9,15 +9,15 @@ export default createRouter({
     routes: [
         {path: '/', component: Home},
         {
+            path: '/detail/:id',
+            name: 'detailPage',
+            component: DetailPage,
+        },
+        {
             path: '/demo',
             name: 'Demo',
             component: Demo
         },
-        {
-            path: '/detail/:id',
-            name: 'detailPage',
-            component: DetailPage,
-        }
     ],
 });
 
