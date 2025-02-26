@@ -1,18 +1,25 @@
 <template>
-  <input type="text" :value="inputValue" @input="handleClick" />
+  <span>lastName:</span>
+  <input type="text" :value="parentValueOne" @input="handleClick" />
+  <el-input :model-value="parentValueTwo" @input="handleElClick" />
+  <div>{{ parentValueOne }}-{{ parentValueTwo }}</div>
 </template>
 
 <script setup lang="ts">
 import { useStore } from 'vuex'
 const store = useStore()
-
-const props = defineProps<{
-  inputValue: string;
-}>()
-const emit = defineEmits(['update:inputValue'])
+// const props = defineProps<{
+//   parentValueOne: string;
+//   parentValueTwo: string;
+// }>()
+const props = defineProps(['parentValueOne', 'parentValueTwo'])
+const emit = defineEmits(['update:parentValueOne', 'update:parentValueTwo'])
 const handleClick = (event) => {
-  emit('update:inputValue', event.target.value)
+  emit('update:parentValueOne', event.target.value)
+}
+const handleElClick = (value) => {
+  emit('update:parentValueTwo', value)
 }
 </script>
 
-<style></style>
+<style scoped></style>

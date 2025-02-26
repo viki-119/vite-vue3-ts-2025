@@ -24,7 +24,7 @@ export default {
   },
   async mounted() {
     this.getUserList();
-    // this.$store.dispatch('user/getUserList', { name: '张三' });
+    this.$store.dispatch('user/queryUserList', { name: '张三' });
     console.log('mounted: 挂载到 DOM 完成');
   },
   beforeUpdate() {
@@ -48,17 +48,19 @@ export default {
 
   computed: {
     ...mapState('user', ['id', 'name']),
-
     ...mapState('user', {
-      user: (state) => state
+      user: (state) => state,
+    }),
+    ...mapState({
+      user: (state) => state.user,
     }),
     /**
      * 获取当前用户信息
      * @returns {Object} 当前用户信息对象
      */
-    user() {
-      return this.$store.state.user;
-    },
+    // user() {
+    //   return this.$store.state.user;
+    // },
 
     userInfo() {
       // const parameter = mapState('user', ['id', 'name']);

@@ -1,10 +1,10 @@
-import axios from 'axios';
+import axios from "axios";
 
 const state = {
-  id: '1234567',
-  name: '张三',
+  id: "1234567",
+  name: "张三",
   userList: [],
-}
+};
 
 const mutations = {
   setUserId(state, payload) {
@@ -16,18 +16,18 @@ const mutations = {
 
   setUserList(state, payload) {
     state.userList = payload.data;
-  }
-}
+  },
+};
 
 const actions = {
   setUserId({ commit }, payload) {
-    commit('setUserId', payload);
+    commit("setUserId", payload);
   },
 
   setUserName({ commit }, payload) {
-    commit('setUserName', payload);
+    commit("setUserName", payload);
   },
-  
+
   /**
    * 异步获取用户列表
    *
@@ -35,11 +35,14 @@ const actions = {
    * @param {Object} payload 载荷对象
    * @returns {Promise<void>} 返回一个Promise对象，无返回值
    */
-  async queryUserList({ commit }, payload) {
-    const res = await axios.get('http://localhost:3000/users')
-    commit('setUserList', res.data);
+  async queryUserList(
+    { commit, state, dispatch, rootState, rootGetters },
+    payload,
+  ) {
+    const res = await axios.get("http://localhost:3000/users");
+    commit("setUserList", res.data);
   },
-}
+};
 
 // const getters = {
 //   getUserId: (state) => {
@@ -56,5 +59,4 @@ export default {
   mutations,
   actions,
   // getters,
-}
-
+};

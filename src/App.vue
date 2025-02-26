@@ -1,16 +1,25 @@
 <template>
-  <nav>
-    <router-link to="/">Home</router-link> |
-    <router-link :to="{ name: 'Demo' }">Demo</router-link>
-  </nav>
-  <router-view></router-view>
+  <ElConfigProvider :locale='currentLocale'>
+    <!-- 你的应用内容 -->
+    <nav>
+      <router-link to="/">Home</router-link> |
+      <router-link :to="{ name: 'Demo' }">Demo</router-link>
+      <button @click="switchLanguage">切换为{{currentLanguage === Languages.zh_cn ? '英语' : '中文'}}</button>
+    </nav>
+    <router-view></router-view>
+  </ElConfigProvider>
+
 </template>
 
-<script lang="ts">
-  export default {
-    // 把当前作为一个组件导出
-    name: 'App',
-  }
+<script lang="ts" setup>
+import { ElConfigProvider } from 'element-plus'
+import { currentLocale, getCurrentLocale, Languages, currentLanguage, setCurrentLanguage } from '@/utils/language'
+
+const switchLanguage = () => {
+  const lang = currentLanguage.value === Languages.zh_cn ? Languages.en_us : Languages.zh_cn;
+  setCurrentLanguage(lang);
+  currentLocale.value = getCurrentLocale(lang);
+}
 // 全局逻辑的处理可以放在这里面;
 </script>
 

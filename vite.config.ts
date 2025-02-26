@@ -10,7 +10,7 @@ import { resolve } from 'path'
 // https://element-plus-docs.bklab.cn/zh-CN/guide/quickstart.html
 export default defineConfig({
   plugins: [
-    vue(), 
+    vue(),
     AutoImport({
       resolvers: [ElementPlusResolver()],
     }),
