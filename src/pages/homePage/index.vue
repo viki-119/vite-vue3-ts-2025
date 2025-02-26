@@ -68,7 +68,7 @@ const handleChildEvent = (userInfo) => {
       你好，Vite + Vue!
     </a>
   </div>
-  <HelloWorld class="helloWorld" msg="Vite + Vue" />
+  <HelloWorld msg="Vite + Vue" />
 </template>
 
 <style module>
@@ -100,4 +100,5 @@ const handleChildEvent = (userInfo) => {
 </style>
 
 <style lang="scss" scoped>
-@use './style.module.scss'; // 引入样式文件</style>
+@use './style.module.scss';
+</style>

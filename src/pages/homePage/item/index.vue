@@ -22,12 +22,13 @@ const callFromParent = (): void => {
   </div>
 </template>
 
+
 <style scoped lang="scss">
 .item-container {
   width: 100px;
   box-sizing: border-box;
   padding: 10px;
   margin: 10px;
-  border: 1px solid gray;
+  border: var(--border-item);
 }
 </style>
