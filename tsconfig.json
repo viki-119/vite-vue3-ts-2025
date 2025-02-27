@@ -8,8 +8,17 @@
     "baseUrl": ".",  // 路径别名的基础URL，相对于当前tsconfig.json文件的位置。
     "paths": {
       "@/*": ["./src/*"],
+      "element-plus/*": ["node_modules/element-plus/es/*"],
+      "element-plus/es/element-plus": ["node_modules/element-plus/es/index.js"]
     },
     // "types": ["elements-plus/global"] // 使用 Volar，通过compilerOptions.type 指定全局组件类型
-  }
+  },
+  "include": [
+    "src/**/*.ts",
+    "src/**/*.d.ts",
+    "src/**/*.vue",
+    // "./**/*.d.ts",
+    "node_modules/element-plus/es/**/*.d.ts"
+  ]
 }
 

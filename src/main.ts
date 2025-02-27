@@ -4,6 +4,9 @@ import store from "@/store";
 import ElementPlus from "element-plus";
 import App from "./App.vue";
 import { getCurrentLocale } from "./utils/language";
+// polyfill
+// import "core-js/stable";
+// import "regenerator-runtime/runtime";
 
 import "element-plus/dist/index.css";
 import "@/styles/style.css";

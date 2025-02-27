@@ -1,14 +1,19 @@
-import { defineConfig } from 'vite'
-import vue from '@vitejs/plugin-vue'
-import AutoImport from 'unplugin-auto-import/vite'
-import Components from 'unplugin-vue-components/vite'
-import { ElementPlusResolver } from 'unplugin-vue-components/resolvers'
-import ElementPlus from 'unplugin-element-plus/vite'
-import { resolve } from 'path'
+import { defineConfig } from "vite";
+import vue from "@vitejs/plugin-vue";
+import AutoImport from "unplugin-auto-import/vite";
+import Components from "unplugin-vue-components/vite";
+import { ElementPlusResolver } from "unplugin-vue-components/resolvers";
+import ElementPlus from "unplugin-element-plus/vite";
+import { resolve } from "path";
+// import legacy from "@vitejs/plugin-legacy";
 
 // https://vite.dev/config/
 // https://element-plus-docs.bklab.cn/zh-CN/guide/quickstart.html
 export default defineConfig({
+  server: {
+    // port: 3000, // 指定服务器端口号
+    open: true, // 在启动服务时自动打开浏览器
+  },
   plugins: [
     vue(),
     AutoImport({
@@ -17,14 +22,16 @@ export default defineConfig({
     Components({
       resolvers: [ElementPlusResolver()],
     }),
-    ElementPlus()
+    ElementPlus({
+      useSource: true, // 启用源码模式解析
+    }),
   ],
-  base: './',
+  base: "./",
   // mode: 'development',
   resolve: {
     alias: {
-      '@': resolve(__dirname, './src'),
-    }
+      "@": resolve(__dirname, "./src"),
+    },
   },
   css: {
     preprocessorOptions: {
@@ -38,4 +45,8 @@ export default defineConfig({
     //   ],
     // },
   },
-})
+  // legacy({
+  //   // targets: ['defaults', 'not IE 11'],
+  //   additionalLegacyPolyfills: ['regenerator-runtime/runtime'],
+  // })
+});
