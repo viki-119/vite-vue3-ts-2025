@@ -8,9 +8,13 @@
     "baseUrl": ".",  // 路径别名的基础URL，相对于当前tsconfig.json文件的位置。
     "paths": {
       "@/*": ["./src/*"],
-      "element-plus/*": ["node_modules/element-plus/es/*"],
-      "element-plus/es/element-plus": ["node_modules/element-plus/es/index.js"]
+      "element-plus/es/element-plus/*": ["node_modules/element-plus/es/*"],
+      "element-plus/es/element-plus": ["node_modules/element-plus/es/index"]
     },
+    "esModuleInterop": true, // 允许从非模块导入导出 修复 CommonJS/ES 模块的兼容性问题。
+    "allowSyntheticDefaultImports": true, // 允许从没有默认导出的模块中默认导入。
+    "types": ["@vue/runtime-core"], // 指定额外的类型声明文件列表。
+    "skipLibCheck": true, // 跳过第三方库类型检查
     // "types": ["elements-plus/global"] // 使用 Volar，通过compilerOptions.type 指定全局组件类型
   },
   "include": [
@@ -18,7 +22,6 @@
     "src/**/*.d.ts",
     "src/**/*.vue",
     // "./**/*.d.ts",
-    "node_modules/element-plus/es/**/*.d.ts"
-  ]
+  ],
+  "exclude": ["node_modules", "dist"]
 }
-
