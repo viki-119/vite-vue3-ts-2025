@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "prepare": "husky install"
   },
   "lint-staged": {
     "*.{ts,js,vue}": [
@@ -14,12 +15,6 @@
       "prettier --write"
     ]
   },
-  "husky": {
-    "hooks": {
-      "pre-commit": "lint-staged"
-    }
-  },
-  "prepare": "husky install",
   "dependencies": {
     "@vitejs/plugin-legacy": "^6.0.2",
     "axios": "^1.7.9",
