@@ -7,7 +7,8 @@
     "dev": "vite",
     "build": "vue-tsc --noEmit && vite build",
     "preview": "vite preview",
-    "prepare": "husky install"
+    "prepare": "husky install",
+    "lint": "eslint --ext .js,.ts,.vue src"
   },
   "lint-staged": {
     "*.{ts,js,vue}": [
@@ -21,21 +22,26 @@
     "core-js": "^3.40.0",
     "element-plus": "^2.9.5",
     "regenerator-runtime": "^0.14.1",
+    "vite-plugin-qiankun": "^1.0.15",
     "vue": "^3.5.13",
     "vue-router": "^4.5.0",
     "vuex": "^4.0.2",
     "vuex-persistedstate": "^4.1.0"
   },
   "devDependencies": {
+    "@eslint/js": "^8.57.1",
     "@types/node": "^22.13.4",
+    "@typescript-eslint/eslint-plugin": "^8.26.1",
+    "@typescript-eslint/parser": "^8.26.1",
     "@vitejs/plugin-vue": "^5.2.1",
-    "@vue/eslint-config-standard": "^9.0.0",
     "@vue/reactivity": "^3.5.13",
     "@vue/runtime-core": "^3.5.13",
     "@vue/tsconfig": "^0.7.0",
     "autoprefixer": "^10.4.20",
     "eslint": "^9.21.0",
+    "eslint-config-prettier": "^9.1.0",
     "eslint-plugin-vue": "^9.32.0",
+    "globals": "^16.0.0",
     "husky": "^9.1.7",
     "lint-staged": "^15.4.3",
     "postcss": "^8.5.2",

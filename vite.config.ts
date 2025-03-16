@@ -7,6 +7,8 @@ import ElementPlus from "unplugin-element-plus/vite";
 import { resolve } from "path";
 import legacy from "@vitejs/plugin-legacy";
 import { visualizer } from "rollup-plugin-visualizer";
+import qiankun from "vite-plugin-qiankun";
+import { name } from "./package.json";
 
 // https://vite.dev/config/
 // https://element-plus-docs.bklab.cn/zh-CN/guide/quickstart.html
@@ -14,7 +16,35 @@ export default defineConfig({
   server: {
     // port: 3000, // 指定服务器端口号
     open: true, // 在启动服务时自动打开浏览器
+    cors: true,
+    // origin: "http://localhost:3000",
+    origin: "*",
   },
+  plugins: [
+    qiankun(name, {
+      useDevMode: true,
+    }),
+    vue(),
+    legacy({
+      targets: ["> 1%", "last 2 versions"],
+      modernPolyfills: ["es.array.iterator", "es.promise"],
+      renderLegacyChunks: false,
+    }),
+    AutoImport({
+      resolvers: [ElementPlusResolver()],
+    }),
+    Components({
+      resolvers: [ElementPlusResolver()],
+    }),
+    ElementPlus({
+      useSource: true, // 启用源码模式解析
+    }),
+    visualizer({
+      open: true, // 构建完成后自动打开报告
+      gzipSize: true, // 显示 Gzip 压缩后大小
+      brotliSize: true, // 显示Brotli压缩后大小
+    }),
+  ],
   build: {
     // chunkSizeWarningLimit: 1000, // 默认 500，单位 KB
     rollupOptions: {
@@ -37,29 +67,7 @@ export default defineConfig({
       },
     },
   },
-  plugins: [
-    legacy({
-      targets: ["> 1%", "last 2 versions"],
-      modernPolyfills: ["es.array.iterator", "es.promise"],
-      renderLegacyChunks: false,
-    }),
-    vue(),
-    AutoImport({
-      resolvers: [ElementPlusResolver()],
-    }),
-    Components({
-      resolvers: [ElementPlusResolver()],
-    }),
-    ElementPlus({
-      useSource: true, // 启用源码模式解析
-    }),
-    visualizer({
-      open: true, // 构建完成后自动打开报告
-      gzipSize: true, // 显示 Gzip 压缩后大小
-      brotliSize: true, // 显示Brotli压缩后大小
-    }),
-  ],
-  base: "./",
+  base: process.env.NODE_ENV === "production" ? "/vite-vue3-ts-2025/" : "/",
   // mode: 'development',
   resolve: {
     alias: {

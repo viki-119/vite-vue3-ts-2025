@@ -1,11 +1,14 @@
-import { createRouter, createWebHashHistory } from "vue-router";
+import { createRouter, createWebHistory } from "vue-router";
+import { qiankunWindow } from "vite-plugin-qiankun/dist/helper";
 
 const Home = () => import("@/pages/homePage/index.vue");
 const Demo = () => import("@/pages/demo/index.vue");
 const DetailPage = () => import("@/pages/detailPage/index.vue");
 
-export default createRouter({
-  history: createWebHashHistory(),
+const router = createRouter({
+  history: createWebHistory(
+    qiankunWindow.__POWERED_BY_QIANKUN__ ? "/vite-vue3-ts-2025" : "/",
+  ),
   routes: [
     { path: "/", component: Home },
     {
@@ -20,3 +23,5 @@ export default createRouter({
     },
   ],
 });
+
+export default router;
