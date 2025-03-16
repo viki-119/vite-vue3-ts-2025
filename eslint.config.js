@@ -1,13 +1,14 @@
 import js from "@eslint/js";
-import eslintPluginVue from "eslint-plugin-vue";
-import eslintConfigPrettier from "eslint-config-prettier";
 import globals from "globals";
 import tseslint from "@typescript-eslint/eslint-plugin";
 import tsParser from "@typescript-eslint/parser";
+import eslintPluginVue from "eslint-plugin-vue";
+import * as vueParser from "vue-eslint-parser";
 
 export default [
   {
     files: ["**/*.{js,mjs,cjs,jsx,mjsx}"],
+    ...js.configs.recommended,
     languageOptions: {
       ecmaVersion: "latest",
       sourceType: "module",
@@ -18,19 +19,17 @@ export default [
       },
     },
     rules: {
-      ...eslintConfigPrettier.rules,
+      "no-unused-vars": "warn",
+      "no-undef": "error",
+      "no-console": "warn",
     },
   },
   {
     files: ["**/*.{ts,tsx,mts,mtsx}"],
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
       parser: tsParser,
       parserOptions: {
         project: ["./tsconfig.json", "./tsconfig.node.json"],
-        ecmaVersion: "latest",
-        sourceType: "module",
       },
       globals: {
         ...globals.browser,
@@ -42,9 +41,7 @@ export default [
       "@typescript-eslint": tseslint,
     },
     rules: {
-      ...eslintConfigPrettier.rules,
       ...tseslint.configs.recommended.rules,
-      // 放宽一些规则
       "@typescript-eslint/no-explicit-any": "warn",
       "@typescript-eslint/no-unused-vars": "warn",
       "@typescript-eslint/ban-ts-comment": "off",
@@ -53,23 +50,30 @@ export default [
   {
     files: ["**/*.vue"],
     languageOptions: {
-      ecmaVersion: "latest",
-      sourceType: "module",
-      parser: eslintPluginVue.parser,
-      globals: {
-        ...globals.browser,
-        ...globals.es2021,
+      parser: vueParser,
+      parserOptions: {
+        parser: tsParser,
+        sourceType: "module",
+        ecmaVersion: "latest",
+        extraFileExtensions: [".vue"],
+        vueFeatures: {
+          filter: true,
+          interpolationAsNonHTML: false,
+        },
       },
     },
     plugins: {
       vue: eslintPluginVue,
     },
     rules: {
-      ...eslintConfigPrettier.rules,
       ...eslintPluginVue.configs.base.rules,
       ...eslintPluginVue.configs["vue3-recommended"].rules,
-      "vue/require-default-prop": "off",
       "vue/multi-word-component-names": "off",
+      "vue/require-default-prop": "off",
+      "vue/no-v-html": "off",
+      "vue/comment-directive": "off",
+      "vue/attributes-order": "warn",
+      "vue/order-in-components": "warn",
     },
   },
   {
