@@ -1,50 +1,74 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-import { useStore } from 'vuex'
-import { useRouter } from 'vue-router'
-import HelloWorld from '@/components/HelloWorld.vue'
-import ChildItem from '@/pages/homePage/item/index.vue'
-import { ListItemType } from './item/types'
+import { computed, ref } from "vue";
+import { useStore } from "vuex";
+import { useRouter } from "vue-router";
+import HelloWorld from "@/components/HelloWorld.vue";
+import ChildItem from "@/pages/homePage/item/index.vue";
+import QiankunStateDemo from "@/components/QiankunStateDemo.vue";
+import { ListItemType } from "./item/types";
 
 const { state, dispatch } = useStore();
 const router = useRouter();
-dispatch('user/queryUserList'); // 调用action方法查询用户列表
-const roleType = ref<string>('');
+dispatch("user/queryUserList"); // 调用action方法查询用户列表
+const roleType = ref<string>("");
 const userList = computed(() => {
-  return state.user.userList.filter((item) => roleType.value ? item.role === roleType.value : true);
+  return state.user.userList.filter((item) =>
+    roleType.value ? item.role === roleType.value : true,
+  );
 });
 
 const handleParent = () => {
-  console.log('父组件');
-}
+  console.log("父组件");
+};
 
 const handleChild = () => {
-  console.log('子组件');
-}
+  console.log("子组件");
+};
 
 const roleList = computed(() => {
-  const tmpArr: string[] = state.user.userList.map((item: ListItemType): string => item.role);
+  const tmpArr: string[] = state.user.userList.map(
+    (item: ListItemType): string => item.role,
+  );
   return Array.from(new Set(tmpArr));
-})
+});
 
 const handleRoleChange = (role) => {
   roleType.value = role;
-}
+};
 
 const handleChildEvent = (userInfo) => {
-  router.push({ path: `/detail/${userInfo.id}`, query: { name: userInfo.name } });
-}
+  router.push({
+    path: `/detail/${userInfo.id}`,
+    query: { name: userInfo.name },
+  });
+};
 </script>
 
 <template>
   <div>
     <div class="child-Item-container">
-      <el-select v-model="roleType" placeholder="请选择角色类型" class="role-select" clearable filterable
-        @change="handleRoleChange">
-        <ElOption v-for="val in roleList" :key="val" :value="val" :label="val" />
+      <el-select
+        v-model="roleType"
+        placeholder="请选择角色类型"
+        class="role-select"
+        clearable
+        filterable
+        @change="handleRoleChange"
+      >
+        <ElOption
+          v-for="val in roleList"
+          :key="val"
+          :value="val"
+          :label="val"
+        />
       </el-select>
-      <ChildItem v-for="item in userList" :key="item.id" :userInfo="item" :name="item.name"
-        @callFromChild="handleChildEvent">
+      <ChildItem
+        v-for="item in userList"
+        :key="item.id"
+        :userInfo="item"
+        :name="item.name"
+        @callFromChild="handleChildEvent"
+      >
         <template #header="slotProps">
           <div>头部{{ slotProps.userInfo.id }}</div>
         </template>
@@ -53,6 +77,8 @@ const handleChildEvent = (userInfo) => {
         </template>
       </ChildItem>
     </div>
+
+    <QiankunStateDemo />
 
     <div :class="$style.myText">
       <div :class="$style.myXX">xxxx</div>
@@ -64,9 +90,7 @@ const handleChildEvent = (userInfo) => {
     <a href="https://vuejs.org/" target="_blank">
       <img src="@/assets/vue.svg" class="logo vue" alt="Vue logo" />
     </a>
-    <a href="https://vite.dev" target="_blank">
-      你好，Vite + Vue!
-    </a>
+    <a href="https://vite.dev" target="_blank"> 你好，Vite + Vue! </a>
   </div>
   <HelloWorld msg="Vite + Vue" />
 </template>
@@ -94,11 +118,11 @@ const handleChildEvent = (userInfo) => {
 
 .myText {
   .myXX {
-    color: red
+    color: red;
   }
 }
 </style>
 
 <style lang="scss" scoped>
-@use './style.module.scss';
+@use "./style.module.scss";
 </style>

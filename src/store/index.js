@@ -3,6 +3,7 @@ import createPersistedState from "vuex-persistedstate";
 
 import user from "./modules/user";
 import userDetail from "./modules/userDetail";
+import globalState from "./modules/globalState";
 
 export default createStore({
   state: {},
@@ -11,6 +12,7 @@ export default createStore({
   modules: {
     user,
     userDetail,
+    globalState, // 注册全局状态模块
   },
   plugins: [
     createPersistedState({
