@@ -41,7 +41,8 @@ const switchLanguage = () => {
     <!-- 你的应用内容 -->
     <nav>
       <router-link to="/">Home</router-link> |
-      <router-link :to="{ name: 'Demo' }">Demo</router-link>
+      <router-link :to="{ name: 'Demo' }">Demo</router-link> |
+      <router-link :to="{ name: 'PiniaPage' }">PiniaPage</router-link>
       <button @click="switchLanguage">
         切换为{{ currentLanguage === Languages.zh_cn ? "英语" : "中文" }}
       </button>

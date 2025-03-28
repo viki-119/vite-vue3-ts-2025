@@ -4,6 +4,7 @@ import { qiankunWindow } from "vite-plugin-qiankun/dist/helper";
 const Home = () => import("@/pages/homePage/index.vue");
 const Demo = () => import("@/pages/demo/index.vue");
 const DetailPage = () => import("@/pages/detailPage/index.vue");
+const PiniaPage = () => import("@/pages/piniaPage/index.vue");
 
 const router = createRouter({
   history: createWebHistory(
@@ -20,6 +21,11 @@ const router = createRouter({
       path: "/demo",
       name: "Demo",
       component: Demo,
+    },
+    {
+      path: "/piniaPage",
+      name: "PiniaPage",
+      component: PiniaPage,
     },
   ],
 });
